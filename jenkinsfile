@@ -3,18 +3,17 @@ pipeline {
     stages {
         stage ('build application'){
             steps{
-                sh 'mvn clean package'
+                sh 'mvn -f pom.xml clean package'
             }
             post {
                 success {
                     echo 'now archiving the artifacts...'
-                    archiveArtifacts artifacts: '**/*.war'
+                    archiveArtifacts artifacts: '**/*.war'       
                 }
             }
-        }
-        stage ('deploy application in staging environment'){
-            build job:'Deploy_application_staging_env'
+        stage('deploy in staging environment'){
+            build job: 'Deploy_application_staging_env'
+            }
         }
     }
 }
-
