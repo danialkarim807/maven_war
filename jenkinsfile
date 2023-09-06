@@ -1,19 +1,22 @@
 pipeline {
     agent any
     stages {
-        stage ('build application'){
-            steps{
+        stage('Build Application') {
+            steps {
                 sh 'mvn -f pom.xml clean package'
             }
             post {
                 success {
-                    echo 'now archiving the artifacts...'
+                    echo "now archiving the artifacts..."
                     archiveArtifacts artifacts: '**/*.war'       
                 }
             }
-        stage('deploy in staging environment'){
-            build job: 'Deploy_application_staging_env'
+        }
+        stage('Deploy in Staging Environment') {
+            steps {
+                build job: 'Deploy_application_staging_env'
             }
         }
     }
 }
+
