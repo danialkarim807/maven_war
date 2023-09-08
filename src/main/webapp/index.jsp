@@ -5,6 +5,8 @@
 
 
 <p>this is from pipeline jenkinsfile to deploy other project</p>
+<p>hello from maven tomcat</p>
+
 
 
 
