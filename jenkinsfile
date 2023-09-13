@@ -7,35 +7,38 @@ pipeline {
             }
             post {
                 success {
-                    echo "now archiving the artifacts..."
+                    echo "Now archiving the artifacts..."
                     archiveArtifacts artifacts: '**/*.war'       
                 }
             }
         }
 
-        stage('create tomcate docker image'){
-            steps{
-                sh 'docker build . -t tomcatesamplewebapp:${env.BUILD_ID}'
+        stage('Create Tomcat Docker Image') {
+            steps {
+                sh 'docker build . -t tomcatesamplewebapp'
+                
             }
         }
-        // --------------------------------------------------------------------------------------
-        // stage('Deploy in Staging Environment') {
-        //     steps {
-        //         build job: 'Deploy_application_staging_env'
-        //     }
-        // }
 
-        // stage('Deploy to Production Environment') {
-        //     steps {
-        //         script {
-        //             timeout(time: 5, unit: 'DAYS') {
-        //                 input message: 'Approve PRODUCTION Deployment?'
-        //             }
-        //         }
-        //         build job: 'Deploy_Application_staging_env_to_production'
-        //     }
-        // }
-        // ---------------------------------------------------------------------------------------------
+        // Uncomment and modify these stages as needed
+        /*
+        stage('Deploy in Staging Environment') {
+            steps {
+                build job: 'Deploy_application_staging_env'
+            }
+        }
+
+        stage('Deploy to Production Environment') {
+            steps {
+                script {
+                    timeout(time: 5, unit: 'DAYS') {
+                        input message: 'Approve PRODUCTION Deployment?'
+                    }
+                }
+                build job: 'Deploy_Application_staging_env_to_production'
+            }
+        }
+        */
     }
 }
 
