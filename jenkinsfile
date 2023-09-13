@@ -15,8 +15,6 @@ pipeline {
 
         stage('Create Tomcat Docker Image') {
             steps {
-                withCredentials([usernamePassword(credentialsId: 'BUILD_ID', passwordVariable: 'meather@601', usernameVariable: 'danialkarim8@gmail.com')]) {
-                sh "echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin"
                 sh 'docker build . -t tomcatesamplewebapp'
                 
             }
