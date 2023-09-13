@@ -15,6 +15,7 @@ pipeline {
 
         stage('Create Tomcat Docker Image') {
             steps {
+                sh 'docker login'
                 sh 'docker build . -t tomcatesamplewebapp'
                 
             }
