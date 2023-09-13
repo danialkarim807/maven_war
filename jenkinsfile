@@ -12,22 +12,30 @@ pipeline {
                 }
             }
         }
-        stage('Deploy in Staging Environment') {
-            steps {
-                build job: 'Deploy_application_staging_env'
-            }
-        }
 
-        stage('Deploy to Production Environment') {
-            steps {
-                script {
-                    timeout(time: 5, unit: 'DAYS') {
-                        input message: 'Approve PRODUCTION Deployment?'
-                    }
-                }
-                build job: 'Deploy_Application_staging_env_to_production'
+        stage('create tomcate docker image'){
+            steps{
+                sh 'docker build . -t tomcatesamplewebapp:${env.BUILD_ID}'
             }
         }
+        // --------------------------------------------------------------------------------------
+        // stage('Deploy in Staging Environment') {
+        //     steps {
+        //         build job: 'Deploy_application_staging_env'
+        //     }
+        // }
+
+        // stage('Deploy to Production Environment') {
+        //     steps {
+        //         script {
+        //             timeout(time: 5, unit: 'DAYS') {
+        //                 input message: 'Approve PRODUCTION Deployment?'
+        //             }
+        //         }
+        //         build job: 'Deploy_Application_staging_env_to_production'
+        //     }
+        // }
+        // ---------------------------------------------------------------------------------------------
     }
 }
 
