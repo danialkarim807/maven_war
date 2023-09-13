@@ -15,6 +15,9 @@ pipeline {
 
         stage('Create Tomcat Docker Image') {
             steps {
+                sh '${env.login}'
+                sh '${env.username}'
+                sh '${env.password}'
                 sh 'docker build . -t tomcatesamplewebapp'
                 
             }
