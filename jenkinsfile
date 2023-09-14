@@ -12,6 +12,33 @@ pipeline {
                 }
             }
         }
+    stage('Run Python Script') {
+            steps {
+                // Install python-dotenv package if not already installed
+                sh 'pip install python-dotenv'
+
+                // Run the Python script
+                sh """
+                python - <<EOF
+                import os
+                from dotenv import load_dotenv
+
+                # Load environment variables from .env file
+                load_dotenv()
+
+                # Access the variables
+                docker login
+                username = os.getenv("name")
+                pass = os.getenv("password")
+                # debug_mode = os.getenv("DEBUG")
+
+                print(f"Database URL: {database_url}")
+                print(f"API Key: {api_key}")
+                print(f"Debug Mode: {debug_mode}")
+                EOF
+                """
+            }
+        }
 
         stage('Create Tomcat Docker Image') {
             steps {
