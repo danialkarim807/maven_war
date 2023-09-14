@@ -15,6 +15,7 @@ pipeline {
     stage('Run Python Script') {
             steps {
                 // Install python-dotenv package if not already installed
+                sh 'apt install python3-pip'
                 sh 'pip install python-dotenv'
 
                 // Run the Python script
