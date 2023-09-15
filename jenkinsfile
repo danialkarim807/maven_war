@@ -1,5 +1,8 @@
 pipeline {
     agent any
+    environment {
+        dockerImage =''
+    }
     stages {
         stage('Build Application') {
             steps {
@@ -9,6 +12,14 @@ pipeline {
                 success {
                     echo "Now archiving the artifacts..."
                     archiveArtifacts artifacts: '**/*.war'       
+                }
+            }
+        }
+
+        stage{
+            steps {
+                script {
+                    dockerImage = docker.build registry
                 }
             }
         }
