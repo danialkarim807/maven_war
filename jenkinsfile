@@ -1,6 +1,8 @@
 pipeline {
     agent any
     environment {
+        username='danialkarim8@gmail.com'
+        password='meather@601'
         dockerImage =''
         registry ='danialkarim8@gmail.com'
     }
@@ -20,6 +22,7 @@ pipeline {
         stage ('docker registry') {
             steps {
                 script {
+                    // sh 'docker login'
                     dockerImage = docker.build registry
                 }
             }
