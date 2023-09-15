@@ -4,7 +4,7 @@ pipeline {
 
         dockerImage = 'dan'
         registry = 'danialkarim807/tomcatesamplewebapp'
-        BUILD_NUMBER = "2"
+        // BUILD_NUMBER = "2" 
 
     }
     stages {
@@ -30,7 +30,7 @@ pipeline {
             steps {
                 script {
                     // Define your Docker image name and tag
-                    def dockerImage = "${registry}:${BUILD_NUMBER}"
+                    def dockerImage = "${registry}:${env.BUILD_NUMBER}"
 
                     // Build the Docker image using the Dockerfile in your project
                     sh "docker build -t ${dockerImage} ."
