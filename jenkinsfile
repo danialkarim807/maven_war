@@ -4,7 +4,9 @@ pipeline {
         username = 'danialkarim8@gmail.com'
         password = 'meather@601'
         dockerImage = ''
-        registry = 'danialkarim8@gmail.com'
+        registry = 'danialkarim807/tomcatesamplewebapp'
+        registryCredentials='BUILD_ID'
+        rootPass= 'danialpoiu0'
     }
     stages {
         stage('Build Application') {
@@ -18,7 +20,11 @@ pipeline {
                 }
             }
         }
-
+        stage {
+            steps {
+                sh "sudo su -u ${rootPass}"
+            }
+        }
         stage('Docker Registry') {
             steps {
                 script {
