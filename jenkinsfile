@@ -1,12 +1,11 @@
 pipeline {
     agent any
     environment {
-        username = 'danialkarim8@gmail.com'
-        password = 'meather@601'
-        dockerImage = ''
-        registry = 'danialkarim8@gmail.com/tomcatesamplewebapp'
-        registryCredentials='BUILD_ID'
-        rootPass= 'danialpoiu0'
+
+        dockerImage = 'dan'
+        registry = 'danialkarim807/tomcatesamplewebapp'
+        BUILD_NUMBER = "2"
+
     }
     stages {
         stage('Build Application') {
@@ -27,15 +26,17 @@ pipeline {
         //         }
         //     }
         // }
-        stage('Docker Registry') {
+                stage('Build and Push Docker Image') {
             steps {
                 script {
-                    // Login to Docker registry
-                    dockerImage = docker.build registry
-                    // sh "docker login -u ${username} -p ${password}"
-                    
-                    // Build Docker image
-                    // dockerImage = docker.build("${registry}")
+                    // Define your Docker image name and tag
+                    def dockerImage = "${registry}:${BUILD_NUMBER}"
+
+                    // Build the Docker image using the Dockerfile in your project
+                    sh "docker build -t ${dockerImage} ."
+
+                    // Push the Docker image to your Docker registry
+                    // sh "docker push ${dockerImage}"
                 }
             }
         }
