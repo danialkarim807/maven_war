@@ -23,7 +23,7 @@ pipeline {
         stage ('root pass') {
             steps {
                 script {
-                sh "sudo su -u ${rootPass}"
+                sh "sudo su -r ${rootPass}"
                 }
             }
         }
