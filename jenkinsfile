@@ -4,7 +4,7 @@ pipeline {
         username = 'danialkarim8@gmail.com'
         password = 'meather@601'
         dockerImage = ''
-        registry = 'danialkarim807/tomcatesamplewebapp'
+        registry = 'danialkarim8@gmail.com/tomcatesamplewebapp'
         registryCredentials='BUILD_ID'
         rootPass= 'danialpoiu0'
     }
