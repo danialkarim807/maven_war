@@ -32,8 +32,7 @@ pipeline {
         }
         
         // Add more stages as needed...
-    }
-}
+
     // stage('Run Python Script') {
     //         steps {
     //             // Install python-dotenv package if not already installed
