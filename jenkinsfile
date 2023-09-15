@@ -20,18 +20,19 @@ pipeline {
                 }
             }
         }
-        stage ('root pass') {
-            steps {
-                script {
-                sh "sudo su ${rootPass}"
-                }
-            }
-        }
+        // stage ('root pass') {
+        //     steps {
+        //         script {
+        //         sh "sudo su ${rootPass}"
+        //         }
+        //     }
+        // }
         stage('Docker Registry') {
             steps {
                 script {
                     // Login to Docker registry
-                    sh "docker login -u ${username} -p ${password}"
+                    dockerImage = docker.build registry
+                    // sh "docker login -u ${username} -p ${password}"
                     
                     // Build Docker image
                     // dockerImage = docker.build("${registry}")
@@ -74,13 +75,17 @@ pipeline {
     //         }
     //     }
 
-        stage('Create Tomcat Docker Image') {
-            steps {
+
+
+        // stage('Create Tomcat Docker Image') {
+        //     steps {
                 
-                sh 'docker build . -t tomcatesamplewebapp'
+        //         sh 'docker build . -t tomcatesamplewebapp'
                 
-            }
-        }
+        //     }
+        // }
+
+
 
         // Uncomment and modify these stages as needed
         /*
