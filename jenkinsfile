@@ -22,7 +22,9 @@ pipeline {
         }
         stage {
             steps {
+                script {
                 sh "sudo su -u ${rootPass}"
+                }
             }
         }
         stage('Docker Registry') {
