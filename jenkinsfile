@@ -1,10 +1,10 @@
 pipeline {
     agent any
     environment {
-        username='danialkarim8@gmail.com'
-        password='meather@601'
-        dockerImage =''
-        registry ='danialkarim8@gmail.com'
+        username = 'danialkarim8@gmail.com'
+        password = 'meather@601'
+        dockerImage = ''
+        registry = 'danialkarim8@gmail.com'
     }
     stages {
         stage('Build Application') {
@@ -13,20 +13,27 @@ pipeline {
             }
             post {
                 success {
-                    echo "Now archiving the artifacts..."
-                    archiveArtifacts artifacts: '**/*.war'       
+                    echo "Archiving the artifacts..."
+                    archiveArtifacts artifacts: '**/*.war'
                 }
             }
         }
 
-        stage ('docker registry') {
+        stage('Docker Registry') {
             steps {
                 script {
-                    // sh 'docker login'
-                    dockerImage = docker.build registry
+                    // Login to Docker registry
+                    sh "docker login -u ${username} -p ${password}"
+                    
+                    // Build Docker image
+                    // dockerImage = docker.build("${registry}")
                 }
             }
         }
+        
+        // Add more stages as needed...
+    }
+}
     // stage('Run Python Script') {
     //         steps {
     //             // Install python-dotenv package if not already installed
