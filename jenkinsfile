@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         dockerImage =''
+        registry ='danialkarim8@gmail.com'
     }
     stages {
         stage('Build Application') {
@@ -58,7 +59,7 @@ pipeline {
 
         stage('Create Tomcat Docker Image') {
             steps {
-                sh 'chmod +x *'
+                
                 sh 'docker build . -t tomcatesamplewebapp'
                 
             }
