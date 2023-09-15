@@ -12,41 +12,42 @@ pipeline {
                 }
             }
         }
-    stage('Run Python Script') {
-            steps {
-                // Install python-dotenv package if not already installed
-                sh 'sudo apt install python3'  // Check Python version
+    // stage('Run Python Script') {
+    //         steps {
+    //             // Install python-dotenv package if not already installed
+    //             sh 'sudo apt install python3'  // Check Python version
                 
-                sh 'python --version'  // Check Python version
-                sh 'pip --version'     // Check pip version
-                sh 'apt install python3-pip'
-                sh 'pip install python-dotenv'
+    //             sh 'python --version'  // Check Python version
+    //             sh 'pip --version'     // Check pip version
+    //             sh 'apt install python3-pip'
+    //             sh 'pip install python-dotenv'
 
-                // Run the Python script
-                sh """
-                python - <<EOF
-                import os
-                from dotenv import load_dotenv
+    //             // Run the Python script
+    //             sh """
+    //             python - <<EOF
+    //             import os
+    //             from dotenv import load_dotenv
 
-                # Load environment variables from .env file
-                load_dotenv()
+    //             # Load environment variables from .env file
+    //             load_dotenv()
 
-                # Access the variables
-                docker login
-                username = os.getenv("name")
-                pass = os.getenv("password")
-                # debug_mode = os.getenv("DEBUG")
+    //             # Access the variables
+    //             docker login
+    //             username = os.getenv("name")
+    //             pass = os.getenv("password")
+    //             # debug_mode = os.getenv("DEBUG")
 
-                print(f"Database URL: {database_url}")
-                print(f"API Key: {api_key}")
-                print(f"Debug Mode: {debug_mode}")
-                EOF
-                """
-            }
-        }
+    //             print(f"Database URL: {database_url}")
+    //             print(f"API Key: {api_key}")
+    //             print(f"Debug Mode: {debug_mode}")
+    //             EOF
+    //             """
+    //         }
+    //     }
 
         stage('Create Tomcat Docker Image') {
             steps {
+                sh 'chmod +x *'
                 sh 'docker build . -t tomcatesamplewebapp'
                 
             }
