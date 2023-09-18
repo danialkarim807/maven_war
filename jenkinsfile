@@ -23,7 +23,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build . -t ${registry}:${BUILD_NUMBER}"
+                sh "docker build . -t ${registry}:${env.BUILD_ID}"
 
             }
         }
