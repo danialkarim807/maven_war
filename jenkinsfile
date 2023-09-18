@@ -30,7 +30,7 @@ pipeline {
             steps {
                 sh "pwd"
                 sh "ls -a"
-                sh "docker build ./maven_war -t ${dockerImage}:${BUILD_NUMBER}"
+                sh "docker build . -t ${dockerImage}:${BUILD_NUMBER}"
 
             }
         }
