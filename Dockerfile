@@ -1,4 +1,4 @@
 FROM tomcat:8.0
 ADD **/*.war MyWebApp/
-EXPOSE 8080
+EXPOSE 8000
 CMD ["catalina.sh", "run"]
