@@ -26,18 +26,12 @@ pipeline {
         //         }
         //     }
         // }
-                stage('Build and Push Docker Image') {
+                stage('Create tomcat docker image') {
             steps {
-                script {
-                    // Define your Docker image name and tag
-                    def dockerImage = "${registry}:${BUILD_NUMBER}"
+                sh "pwd"
+                sh "ls -a"
+                sh "docker build . -t ${dockerImage}:${BUILD_NUMBER}"
 
-                    // Build the Docker image using the Dockerfile in your project
-                    sh "docker build -t ${dockerImage} ."
-
-                    // Push the Docker image to your Docker registry
-                    // sh "docker push ${dockerImage}"
-                }
             }
         }
         
