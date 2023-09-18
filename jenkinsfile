@@ -19,13 +19,6 @@ pipeline {
                 }
             }
         }
-        // stage ('root pass') {
-        //     steps {
-        //         script {
-        //         sh "sudo su ${rootPass}"
-        //         }
-        //     }
-        // }
                 stage('Create tomcat docker image') {
             steps {
                 sh "pwd"
@@ -34,73 +27,6 @@ pipeline {
 
             }
         }
-        
-        // Add more stages as needed...
-
-    // stage('Run Python Script') {
-    //         steps {
-    //             // Install python-dotenv package if not already installed
-    //             sh 'sudo apt install python3'  // Check Python version
-                
-    //             sh 'python --version'  // Check Python version
-    //             sh 'pip --version'     // Check pip version
-    //             sh 'apt install python3-pip'
-    //             sh 'pip install python-dotenv'
-
-    //             // Run the Python script
-    //             sh """
-    //             python - <<EOF
-    //             import os
-    //             from dotenv import load_dotenv
-
-    //             # Load environment variables from .env file
-    //             load_dotenv()
-
-    //             # Access the variables
-    //             docker login
-    //             username = os.getenv("name")
-    //             pass = os.getenv("password")
-    //             # debug_mode = os.getenv("DEBUG")
-
-    //             print(f"Database URL: {database_url}")
-    //             print(f"API Key: {api_key}")
-    //             print(f"Debug Mode: {debug_mode}")
-    //             EOF
-    //             """
-    //         }
-    //     }
-
-
-
-        // stage('Create Tomcat Docker Image') {
-        //     steps {
-                
-        //         sh 'docker build . -t tomcatesamplewebapp'
-                
-        //     }
-        // }
-
-
-
-        // Uncomment and modify these stages as needed
-        /*
-        stage('Deploy in Staging Environment') {
-            steps {
-                build job: 'Deploy_application_staging_env'
-            }
-        }
-
-        stage('Deploy to Production Environment') {
-            steps {
-                script {
-                    timeout(time: 5, unit: 'DAYS') {
-                        input message: 'Approve PRODUCTION Deployment?'
-                    }
-                }
-                build job: 'Deploy_Application_staging_env_to_production'
-            }
-        }
-        */
     }
 }
 
