@@ -99,3 +99,19 @@ def list_aws_services(event, context):
         'statusCode': 200,
         'body': ', '.join(service_names)
     }
+# ------------------------------------create s3 from lambda----------------------------
+
+
+import json 
+import boto3
+
+def lambda_handler(event, contaxt):
+    bucket_name='save_data_from_lambda'
+    listen001=["this is first list"]
+    s3_path_001 = "001"
+
+    s3_client = boto3.client('s3', 'eu-central-1')
+    save_to_s3 = s3_client.put_objects(
+        key=s3_path_001,
+        Bucket= bucket_name,
+        body=json.dumps(listen001).encode('UTF-8'))
