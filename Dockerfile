@@ -1,4 +1,4 @@
 FROM tomcat:8.0
-ADD **/*.war /opt/tomcat/for-tomcat-8.5/
+ADD **/*.war /opt/tomcat/apache-tomcat-8.5.91
 EXPOSE 8080
 CMD ["catalina.sh", "run" ]
